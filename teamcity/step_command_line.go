@@ -21,6 +21,8 @@ type StepCommandLine struct {
 	CommandParameters string
 	//ExecuteMode is the execute mode for the step. See StepExecuteMode for details.
 	ExecuteMode StepExecuteMode
+	//DockerContainerImageID is the container image reference for the container the step will run in.
+	DockerContainerImageID string
 }
 
 //NewStepCommandLineScript creates a command line build step that runs an inline platform-specific script.
@@ -84,6 +86,10 @@ func (s *StepCommandLine) properties() *Properties {
 		props.AddOrReplaceValue("use.custom.script", "true")
 	}
 
+	if s.DockerContainerImageID != "" {
+		props.AddOrReplaceValue("plugin.docker.imageId", s.DockerContainerImageID)
+	}
+
 	return props
 }
 
@@ -134,5 +140,10 @@ func (s *StepCommandLine) UnmarshalJSON(data []byte) error {
 	if v, ok := props.GetOk("teamcity.step.mode"); ok {
 		s.ExecuteMode = StepExecuteMode(v)
 	}
+
+	if v, ok := props.GetOk("plugin.docker.imageId"); ok {
+		s.DockerContainerImageID = v
+	}
+
 	return nil
 }
