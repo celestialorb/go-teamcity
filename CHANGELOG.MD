@@ -60,24 +60,24 @@ Whenever a major version is bumped, backwards compatibility with previous TeamCi
 First release.
 
 [//]: # (Release links)
-[1.1.0]: https://github.com/cvbarros/go-teamcity-sdk/releases/tag/v1.1.0
-[1.0.0]: https://github.com/cvbarros/go-teamcity-sdk/releases/tag/v1.0.0
-[0.5.1]: https://github.com/cvbarros/go-teamcity-sdk/releases/tag/v0.5.1
-[0.4.0]: https://github.com/cvbarros/go-teamcity-sdk/releases/tag/v0.4.0
-[0.2.0]: https://github.com/cvbarros/go-teamcity-sdk/releases/tag/v0.2.0
-[0.1.0]: https://github.com/cvbarros/go-teamcity-sdk/releases/tag/v0.1.0
+[1.1.0]: https://github.com/celestialorb/go-teamcity-sdk/releases/tag/v1.1.0
+[1.0.0]: https://github.com/celestialorb/go-teamcity-sdk/releases/tag/v1.0.0
+[0.5.1]: https://github.com/celestialorb/go-teamcity-sdk/releases/tag/v0.5.1
+[0.4.0]: https://github.com/celestialorb/go-teamcity-sdk/releases/tag/v0.4.0
+[0.2.0]: https://github.com/celestialorb/go-teamcity-sdk/releases/tag/v0.2.0
+[0.1.0]: https://github.com/celestialorb/go-teamcity-sdk/releases/tag/v0.1.0
 
 [//]: # (Issue/PR links)
-[#53]: https://github.com/cvbarros/go-teamcity-sdk/pull/53
-[#67]: https://github.com/cvbarros/go-teamcity/pull/67
-[#68]: https://github.com/cvbarros/go-teamcity/pull/68
-[#72]: https://github.com/cvbarros/go-teamcity/pull/72
-[#73]: https://github.com/cvbarros/go-teamcity/pull/73
-[#86]: https://github.com/cvbarros/go-teamcity/pull/86
-[#83]: https://github.com/cvbarros/go-teamcity/pull/83
-[#82]: https://github.com/cvbarros/go-teamcity/pull/82
-[#81]: https://github.com/cvbarros/go-teamcity/pull/81
-[#80]: https://github.com/cvbarros/go-teamcity/pull/80
-[#76]: https://github.com/cvbarros/go-teamcity/pull/76
+[#53]: https://github.com/celestialorb/go-teamcity-sdk/pull/53
+[#67]: https://github.com/celestialorb/go-teamcity/pull/67
+[#68]: https://github.com/celestialorb/go-teamcity/pull/68
+[#72]: https://github.com/celestialorb/go-teamcity/pull/72
+[#73]: https://github.com/celestialorb/go-teamcity/pull/73
+[#86]: https://github.com/celestialorb/go-teamcity/pull/86
+[#83]: https://github.com/celestialorb/go-teamcity/pull/83
+[#82]: https://github.com/celestialorb/go-teamcity/pull/82
+[#81]: https://github.com/celestialorb/go-teamcity/pull/81
+[#80]: https://github.com/celestialorb/go-teamcity/pull/80
+[#76]: https://github.com/celestialorb/go-teamcity/pull/76
 
 

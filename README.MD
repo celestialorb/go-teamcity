@@ -1,13 +1,13 @@
 # go-teamcity #
 
-[![GoDoc](https://godoc.org/github.com/cvbarros/go-teamcity/github?status.svg)](https://godoc.org/github.com/cvbarros/go-teamcity) [![Build Status](https://travis-ci.com/cvbarros/go-teamcity.svg?branch=master)](https://travis-ci.com/cvbarros/go-teamcity)
+[![GoDoc](https://godoc.org/github.com/celestialorb/go-teamcity/github?status.svg)](https://godoc.org/github.com/celestialorb/go-teamcity) [![Build Status](https://travis-ci.com/cvbarros/go-teamcity.svg?branch=master)](https://travis-ci.com/cvbarros/go-teamcity)
 
 
 ## LOOKING FOR MAINTAINTERS ##
 
 This project is in need of new maintainers, please see here:  
-https://github.com/cvbarros/go-teamcity/issues/94.  
-https://github.com/cvbarros/terraform-provider-teamcity/issues/113
+https://github.com/celestialorb/go-teamcity/issues/94.  
+https://github.com/celestialorb/terraform-provider-teamcity/issues/113
 
 ---
 _go-teamcity_ is a Go client library interacting with Jetbrain's [TeamCity CI server REST API](https://confluence.jetbrains.com/display/TCD10/REST+API).  
@@ -15,12 +15,12 @@ Currently, guaranteed supported API version (on CI tests) is **TeamCity 2019.2.2
 
 ## Motivation ##
 go-teamcity is intended for automating Jetbrain's TeamCity tasks and configurations using Go.
-It is also the client library used in [TeamCity Provider](https://github.com/cvbarros/terraform-provider-teamcity), a [Hashicorp's Terraform](https://www.terraform.io) custom provider to configure TeamCity as code.
+It is also the client library used in [TeamCity Provider](https://github.com/celestialorb/terraform-provider-teamcity), a [Hashicorp's Terraform](https://www.terraform.io) custom provider to configure TeamCity as code.
 
 ## Usage ##
 
 ```go
-import teamcity "github.com/cvbarros/go-teamcity"
+import teamcity "github.com/celestialorb/go-teamcity"
 ```
 
 Construct a new Teamcity client with a default `http.Client` for the server at the `TEAMCITY_ADDR` environment variable, then use the various services exposed by the client to use TeamCity API's features.
@@ -41,7 +41,7 @@ project,  err := client.Projects.GetById("myproject")
 
 ### Examples ###
 
-For now, [integration tests](https://github.com/cvbarros/go-teamcity/search?q=filename%3A*_test.go&unscoped_q=filename%3A*_test.go) are the best examples on how to use the library to interact with the several services.
+For now, [integration tests](https://github.com/celestialorb/go-teamcity/search?q=filename%3A*_test.go&unscoped_q=filename%3A*_test.go) are the best examples on how to use the library to interact with the several services.
 
 ## Other Information ##
 

@@ -3,7 +3,7 @@ package teamcity_test
 import (
 	"testing"
 
-	"github.com/cvbarros/go-teamcity/teamcity"
+	"github.com/celestialorb/go-teamcity/teamcity"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -62,7 +62,7 @@ func TestGitVcsRoot_Update(t *testing.T) {
 	}
 	opt, _ := teamcity.NewGitVcsRootOptionsWithAgentSettings(
 		"refs/head/develop",
-		"https://github.com/cvbarros/go-teamcity",
+		"https://github.com/celestialorb/go-teamcity",
 		"",
 		teamcity.GitAuthMethodAnonymous,
 		"",
@@ -90,7 +90,7 @@ func TestGitVcsRoot_Update(t *testing.T) {
 
 	actualOpt := actual.Options
 	assert.Equal(teamcity.GitAuthMethodAnonymous, actualOpt.AuthMethod)
-	assert.Equal("https://github.com/cvbarros/go-teamcity", actualOpt.FetchURL)
+	assert.Equal("https://github.com/celestialorb/go-teamcity", actualOpt.FetchURL)
 	assert.Equal("refs/head/develop", actualOpt.DefaultBranch)
 	assert.Equal("IGNORE", actualOpt.SubModuleCheckout)
 	assert.Equal(teamcity.CleanFilesPolicyIgnoredUntracked, actualOpt.AgentSettings.CleanFilesPolicy)
@@ -101,7 +101,7 @@ func TestGitVcsRoot_Update(t *testing.T) {
 func TestGitVcsRoot_CreateWithUsernamePassword(t *testing.T) {
 	client := setup()
 	newProject := getTestProjectData(testVcsRootProjectId, "")
-	opts, _ := teamcity.NewGitVcsRootOptions("refs/head/master", "https://github.com/cvbarros/go-teamcity/", "", teamcity.GitAuthMethodPassword, "admin", "admin")
+	opts, _ := teamcity.NewGitVcsRootOptions("refs/head/master", "https://github.com/celestialorb/go-teamcity/", "", teamcity.GitAuthMethodPassword, "admin", "admin")
 
 	createdProject, err := client.Projects.Create(newProject)
 
@@ -136,7 +136,7 @@ func TestGitVcsRoot_CreateWithUsernamePassword(t *testing.T) {
 }
 
 func TestGitVcsRoot_Invariants(t *testing.T) {
-	gitOpt, _ := teamcity.NewGitVcsRootOptionsDefaults("master", "https://github.com/cvbarros/go-teamcity/")
+	gitOpt, _ := teamcity.NewGitVcsRootOptionsDefaults("master", "https://github.com/celestialorb/go-teamcity/")
 	t.Run("projectID is required", func(t *testing.T) {
 		_, err := teamcity.NewGitVcsRoot("", "name", gitOpt)
 		require.EqualError(t, err, "projectID is required")
@@ -152,7 +152,7 @@ func TestGitVcsRoot_Invariants(t *testing.T) {
 }
 
 func getTestVcsRootData(projectId string) teamcity.VcsRoot {
-	opts, _ := teamcity.NewGitVcsRootOptionsDefaults("refs/head/master", "https://github.com/cvbarros/go-teamcity")
+	opts, _ := teamcity.NewGitVcsRootOptionsDefaults("refs/head/master", "https://github.com/celestialorb/go-teamcity")
 	opts.BranchSpec = []string{"+:refs/heads/*", "-:refs/heads/*-ng-build"}
 	v, _ := teamcity.NewGitVcsRoot(projectId, "Application", opts)
 	return v
