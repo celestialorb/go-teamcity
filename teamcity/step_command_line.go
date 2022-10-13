@@ -56,6 +56,10 @@ func NewStepCommandLineExecutable(name string, executable string, args string) (
 	}, nil
 }
 
+func (s *StepCommandLine) GetContainer() string {
+	return s.DockerContainerImageID
+}
+
 //GetID is a wrapper implementation for ID field, to comply with Step interface
 func (s *StepCommandLine) GetID() string {
 	return s.ID

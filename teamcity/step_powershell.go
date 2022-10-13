@@ -53,6 +53,10 @@ func NewStepPowershellCode(name string, code string) (*StepPowershell, error) {
 	}, nil
 }
 
+func (s *StepPowershell) GetContainer() string {
+	return ""
+}
+
 //GetID is a wrapper implementation for ID field, to comply with Step interface
 func (s *StepPowershell) GetID() string {
 	return s.ID

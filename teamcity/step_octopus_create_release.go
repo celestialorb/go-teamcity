@@ -59,6 +59,10 @@ func NewStepOctopusCreateRelease(name string) (*StepOctopusCreateRelease, error)
 	}, nil
 }
 
+func (s *StepOctopusCreateRelease) GetContainer() string {
+	return ""
+}
+
 func (s *StepOctopusCreateRelease) GetID() string {
 	return s.ID
 }

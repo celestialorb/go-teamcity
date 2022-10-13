@@ -39,6 +39,10 @@ func NewStepOctopusPushPackage(name string) (*StepOctopusPushPackage, error) {
 	}, nil
 }
 
+func (s *StepOctopusPushPackage) GetContainer() string {
+	return ""
+}
+
 func (s *StepOctopusPushPackage) GetID() string {
 	return s.ID
 }
