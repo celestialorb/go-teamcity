@@ -117,11 +117,22 @@ func (s *StepCommandLine) properties() *Properties {
 		props.AddOrReplaceValue("use.custom.script", "true")
 	}
 
+	// TODO: move the container property management to another function.
+	// If we don't have a container image reference, don't set any container
+	// properties.
 	if s.Container.ImageReference != "" {
+		// Set the container image property.
 		props.AddOrReplaceValue("plugin.docker.imageId", s.Container.ImageReference)
-		props.AddOrReplaceValue("plugin.docker.imagePlatform", string(s.Container.ImagePlatform))
+
+		// Only set the container platform if we've explicitly selected one.
+		if s.Container.ImagePlatform != Any {
+			props.AddOrReplaceValue("plugin.docker.imagePlatform", string(s.Container.ImagePlatform))
+		}
+
+		// Set whether or not to explicitly pull the image.
 		props.AddOrReplaceValue("plugin.docker.pull.enabled", strconv.FormatBool(s.Container.ExplicitlyPullImage))
 
+		// If we're given any additional run arguments, go ahead and set them.
 		if s.Container.AdditionalContainerRunArguments != "" {
 			props.AddOrReplaceValue("plugin.docker.run.parameters", s.Container.AdditionalContainerRunArguments)
 		}
