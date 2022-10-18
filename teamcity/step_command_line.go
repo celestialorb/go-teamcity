@@ -4,9 +4,36 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
 )
 
-//StepCommandLine represents a a build step of type "CommandLine"
+type ContainerPlatform string
+
+const (
+	Any     ContainerPlatform = "*"
+	Linux                     = "linux"
+	Windows                   = "windows"
+)
+
+// ContainerDefinition represents the container configuration that a command
+// line step will run within.
+type ContainerDefinition struct {
+	// Image reference is the container image reference including registry, image,
+	// and optionally tag and digest.
+	ImageReference string
+
+	// Image platform is the platform the container will run on.
+	// e.g. Linux, Windows.
+	ImagePlatform ContainerPlatform
+
+	// Whether or not to explicitly pull the image every time the step is run.
+	ExplicitlyPullImage bool
+
+	// Additional arguments to add to the container run (i.e. docker run) command.
+	AdditionalContainerRunArguments string
+}
+
+// StepCommandLine represents a a build step of type "CommandLine"
 type StepCommandLine struct {
 	ID           string
 	Name         string
@@ -21,11 +48,11 @@ type StepCommandLine struct {
 	CommandParameters string
 	//ExecuteMode is the execute mode for the step. See StepExecuteMode for details.
 	ExecuteMode StepExecuteMode
-	//DockerContainerImageID is the container image reference for the container the step will run in.
-	DockerContainerImageID string
+	//Container is the definition of the container the step will run within.
+	Container ContainerDefinition
 }
 
-//NewStepCommandLineScript creates a command line build step that runs an inline platform-specific script.
+// NewStepCommandLineScript creates a command line build step that runs an inline platform-specific script.
 func NewStepCommandLineScript(name string, script string) (*StepCommandLine, error) {
 	if script == "" {
 		return nil, errors.New("script is required")
@@ -40,7 +67,7 @@ func NewStepCommandLineScript(name string, script string) (*StepCommandLine, err
 	}, nil
 }
 
-//NewStepCommandLineExecutable creates a command line that invokes an external executable.
+// NewStepCommandLineExecutable creates a command line that invokes an external executable.
 func NewStepCommandLineExecutable(name string, executable string, args string) (*StepCommandLine, error) {
 	if executable == "" {
 		return nil, errors.New("executable is required")
@@ -56,21 +83,21 @@ func NewStepCommandLineExecutable(name string, executable string, args string) (
 	}, nil
 }
 
-func (s *StepCommandLine) GetContainer() string {
-	return s.DockerContainerImageID
+func (s *StepCommandLine) GetContainer() ContainerDefinition {
+	return s.Container
 }
 
-//GetID is a wrapper implementation for ID field, to comply with Step interface
+// GetID is a wrapper implementation for ID field, to comply with Step interface
 func (s *StepCommandLine) GetID() string {
 	return s.ID
 }
 
-//GetName is a wrapper implementation for Name field, to comply with Step interface
+// GetName is a wrapper implementation for Name field, to comply with Step interface
 func (s *StepCommandLine) GetName() string {
 	return s.Name
 }
 
-//Type returns the step type, in this case "StepTypeCommandLine".
+// Type returns the step type, in this case "StepTypeCommandLine".
 func (s *StepCommandLine) Type() BuildStepType {
 	return StepTypeCommandLine
 }
@@ -90,8 +117,14 @@ func (s *StepCommandLine) properties() *Properties {
 		props.AddOrReplaceValue("use.custom.script", "true")
 	}
 
-	if s.DockerContainerImageID != "" {
-		props.AddOrReplaceValue("plugin.docker.imageId", s.DockerContainerImageID)
+	if s.Container.ImageReference != "" {
+		props.AddOrReplaceValue("plugin.docker.imageId", s.Container.ImageReference)
+		props.AddOrReplaceValue("plugin.docker.imagePlatform", string(s.Container.ImagePlatform))
+		props.AddOrReplaceValue("plugin.docker.pull.enabled", strconv.FormatBool(s.Container.ExplicitlyPullImage))
+
+		if s.Container.AdditionalContainerRunArguments != "" {
+			props.AddOrReplaceValue("plugin.docker.run.parameters", s.Container.AdditionalContainerRunArguments)
+		}
 	}
 
 	return props
@@ -106,13 +139,13 @@ func (s *StepCommandLine) serializable() *stepJSON {
 	}
 }
 
-//MarshalJSON implements JSON serialization for StepCommandLine
+// MarshalJSON implements JSON serialization for StepCommandLine
 func (s *StepCommandLine) MarshalJSON() ([]byte, error) {
 	out := s.serializable()
 	return json.Marshal(out)
 }
 
-//UnmarshalJSON implements JSON deserialization for StepCommandLine
+// UnmarshalJSON implements JSON deserialization for StepCommandLine
 func (s *StepCommandLine) UnmarshalJSON(data []byte) error {
 	var aux stepJSON
 	if err := json.Unmarshal(data, &aux); err != nil {
@@ -146,7 +179,7 @@ func (s *StepCommandLine) UnmarshalJSON(data []byte) error {
 	}
 
 	if v, ok := props.GetOk("plugin.docker.imageId"); ok {
-		s.DockerContainerImageID = v
+		s.Container.ImageReference = v
 	}
 
 	return nil

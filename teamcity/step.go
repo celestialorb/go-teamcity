@@ -19,7 +19,7 @@ const (
 	StepTypeOctopusCreateRelease BuildStepType = "octopus.create.release"
 )
 
-//StepExecuteMode represents how a build configuration step will execute regarding others.
+// StepExecuteMode represents how a build configuration step will execute regarding others.
 type StepExecuteMode = string
 
 const (
@@ -35,7 +35,7 @@ const (
 
 // Step interface represents a a build configuration/template build step. To interact with concrete step types, see the Step* types.
 type Step interface {
-	GetContainer() string
+	GetContainer() ContainerDefinition
 	GetID() string
 	GetName() string
 	Type() string
