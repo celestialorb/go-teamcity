@@ -10,9 +10,9 @@ import (
 type ContainerPlatform string
 
 const (
-	Any     ContainerPlatform = "*"
-	Linux                     = "linux"
-	Windows                   = "windows"
+	Any     ContainerPlatform = ""
+	Linux   ContainerPlatform = "linux"
+	Windows ContainerPlatform = "windows"
 )
 
 // ContainerDefinition represents the container configuration that a command
