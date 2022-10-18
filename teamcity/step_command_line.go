@@ -193,5 +193,21 @@ func (s *StepCommandLine) UnmarshalJSON(data []byte) error {
 		s.Container.ImageReference = v
 	}
 
+	if v, ok := props.GetOk("plugin.docker.imagePlatform"); ok {
+		s.Container.ImagePlatform = ContainerPlatform(v)
+	}
+
+	if v, ok := props.GetOk("plugin.docker.pull.enabled"); ok {
+		b, err := strconv.ParseBool(v)
+		if err != nil {
+			return err
+		}
+		s.Container.ExplicitlyPullImage = b
+	}
+
+	if v, ok := props.GetOk("plugin.docker.run.parameters"); ok {
+		s.Container.AdditionalContainerRunArguments = v
+	}
+
 	return nil
 }
