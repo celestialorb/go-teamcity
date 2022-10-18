@@ -39,8 +39,8 @@ func NewStepOctopusPushPackage(name string) (*StepOctopusPushPackage, error) {
 	}, nil
 }
 
-func (s *StepOctopusPushPackage) GetContainer() string {
-	return ""
+func (s *StepOctopusPushPackage) GetContainer() ContainerDefinition {
+	return ContainerDefinition{}
 }
 
 func (s *StepOctopusPushPackage) GetID() string {
@@ -77,7 +77,7 @@ func (s *StepOctopusPushPackage) serializable() *stepJSON {
 	}
 }
 
-//MarshalJSON implements JSON serialization for StepOctopusPushPackage
+// MarshalJSON implements JSON serialization for StepOctopusPushPackage
 func (s *StepOctopusPushPackage) MarshalJSON() ([]byte, error) {
 	out := s.serializable()
 	return json.Marshal(out)

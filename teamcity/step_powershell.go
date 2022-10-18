@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-//StepPowershell represents a a build step of type "Powershell"
+// StepPowershell represents a a build step of type "Powershell"
 type StepPowershell struct {
 	ID       string
 	Name     string
@@ -23,7 +23,7 @@ type StepPowershell struct {
 	ExecuteMode StepExecuteMode
 }
 
-//NewStepPowershellScriptFile creates a powershell build step that runs a script file instead of inline code.
+// NewStepPowershellScriptFile creates a powershell build step that runs a script file instead of inline code.
 func NewStepPowershellScriptFile(name string, scriptFile string, scriptArgs string) (*StepPowershell, error) {
 	if scriptFile == "" {
 		return nil, errors.New("scriptFile is required")
@@ -39,7 +39,7 @@ func NewStepPowershellScriptFile(name string, scriptFile string, scriptArgs stri
 	}, nil
 }
 
-//NewStepPowershellCode creates a powershell build step that runs the inline code.
+// NewStepPowershellCode creates a powershell build step that runs the inline code.
 func NewStepPowershellCode(name string, code string) (*StepPowershell, error) {
 	if code == "" {
 		return nil, errors.New("code is required")
@@ -53,21 +53,21 @@ func NewStepPowershellCode(name string, code string) (*StepPowershell, error) {
 	}, nil
 }
 
-func (s *StepPowershell) GetContainer() string {
-	return ""
+func (s *StepPowershell) GetContainer() ContainerDefinition {
+	return ContainerDefinition{}
 }
 
-//GetID is a wrapper implementation for ID field, to comply with Step interface
+// GetID is a wrapper implementation for ID field, to comply with Step interface
 func (s *StepPowershell) GetID() string {
 	return s.ID
 }
 
-//GetName is a wrapper implementation for Name field, to comply with Step interface
+// GetName is a wrapper implementation for Name field, to comply with Step interface
 func (s *StepPowershell) GetName() string {
 	return s.Name
 }
 
-//Type returns the step type, in this case "StepTypePowershell".
+// Type returns the step type, in this case "StepTypePowershell".
 func (s *StepPowershell) Type() BuildStepType {
 	return StepTypePowershell
 }
@@ -102,13 +102,13 @@ func (s *StepPowershell) serializable() *stepJSON {
 	}
 }
 
-//MarshalJSON implements JSON serialization for StepPowershell
+// MarshalJSON implements JSON serialization for StepPowershell
 func (s *StepPowershell) MarshalJSON() ([]byte, error) {
 	out := s.serializable()
 	return json.Marshal(out)
 }
 
-//UnmarshalJSON implements JSON deserialization for StepPowershell
+// UnmarshalJSON implements JSON deserialization for StepPowershell
 func (s *StepPowershell) UnmarshalJSON(data []byte) error {
 	var aux stepJSON
 	if err := json.Unmarshal(data, &aux); err != nil {
